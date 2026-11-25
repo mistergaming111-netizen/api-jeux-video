@@ -1,3 +1,6 @@
+import {findAllGames} from '../repositories/game.repository.js';
+import type {Game} from '../models/game.model.js';
+
 export class HttpError extends Error {
     status: number;
     details?: string[];
@@ -7,4 +10,8 @@ export class HttpError extends Error {
         this.status = status;
         this.details = details;
     }
+}
+
+export function getAllGames(): Game[] {
+    return findAllGames();
 }
