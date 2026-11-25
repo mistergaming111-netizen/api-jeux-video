@@ -2,7 +2,7 @@ API Jeux Vidéo
 
 Une petite API REST pour gérer ma collection de jeux vidéo. Faite en TypeScript avec Express et SQLite, pour le TP CRUD.
 
-On peut lister les jeux, en voir un, en ajouter, en modifier et en supprimer.
+(Exécuter le contenu de `src/database/seed.sql` pour ajouter les jeux de démo)
 
 Ce qu'il y a dedans
 TypeScript + Node.js
