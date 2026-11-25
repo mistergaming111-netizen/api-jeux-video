@@ -15,8 +15,18 @@ paths:
       responses:
         '200':
           description: Liste des jeux récupérée avec succès.
-          # TODO : décrire le tableau JSON d'objets Game.
-        # TODO : ajouter les réponses d'erreur pertinentes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        '500':
+          description: Erreur interne du serveur.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     post:
       summary: Ajouter un jeu
       # TODO : ajouter le corps JSON à partir de CreateGameInput.
