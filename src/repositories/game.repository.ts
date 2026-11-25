@@ -1,5 +1,5 @@
 import {db} from '../database/database.js';
-import {Game} from '../models/game.model.js';
+import {Game, type CreateGameInput} from '../models/game.model.js';
 
 interface GameRow {
     id: number;
@@ -27,4 +27,19 @@ export function findGameById(id: number): Game | undefined {
     }
 
     return toGame(row);
+}
+
+export function createGame(input: CreateGameInput): Game {
+    const result = db
+        .prepare('INSERT INTO games (title, editor, release_year, genre, rating) VALUES (@title, @editor, @releaseYear, @genre, @rating)')
+        .run({
+            title: input.title,
+            editor: input.editor,
+            releaseYear: input.releaseYear,
+            genre: input.genre,
+            rating: input.rating
+        });
+
+    const id = Number(result.lastInsertRowid);
+    return new Game(id, input.title, input.editor, input.releaseYear, input.genre, input.rating);
 }
