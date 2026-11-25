@@ -27,7 +27,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        post:
+    post:
       summary: Ajouter un jeu
       requestBody:
         required: true
@@ -60,29 +60,93 @@ paths:
       - name: id
         in: path
         required: true
+        description: Identifiant du jeu (entier strictement positif).
         schema:
           type: integer
+          minimum: 1
     get:
       summary: Récupérer un jeu
       responses:
         '200':
           description: Jeu trouvé.
-          # TODO : décrire le jeu renvoyé.
-        # TODO : ajouter les réponses d'erreur pertinentes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Identifiant invalide.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Jeu introuvable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Erreur interne du serveur.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     put:
       summary: Modifier un jeu
-      # TODO : ajouter le corps JSON à partir de CreateGameInput.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGameInput'
       responses:
         '200':
           description: Jeu modifié.
-          # TODO : décrire le jeu renvoyé.
-        # TODO : ajouter les réponses d'erreur pertinentes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        '400':
+          description: Identifiant ou données invalides.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Jeu introuvable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Erreur interne du serveur.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     delete:
       summary: Supprimer un jeu
       responses:
         '204':
-          description: Jeu supprimé.
-        # TODO : ajouter les réponses d'erreur pertinentes.
+          description: Jeu supprimé (aucun contenu renvoyé).
+        '400':
+          description: Identifiant invalide.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Jeu introuvable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Erreur interne du serveur.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   schemas:
