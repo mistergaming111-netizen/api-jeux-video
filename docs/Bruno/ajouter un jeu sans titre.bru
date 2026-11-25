@@ -1,0 +1,33 @@
+meta {
+  name: ajouter un jeu sans titre
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/api/games
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "",
+    "editor": "Test",
+    "releaseYear": 2020,
+    "genre": "Test",
+    "rating": 5
+  }
+}
+
+tests {
+  test("Réponse 400", function () {
+    expect(res.getStatus()).to.equal(400);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

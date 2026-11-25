@@ -1,0 +1,37 @@
+meta {
+  name: Modifier un jeu
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/games/{{gameId}}
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Celeste",
+    "editor": "Maddy Makes Games",
+    "releaseYear": 2018,
+    "genre": "Plateforme",
+    "rating": 9.5
+  }
+}
+
+tests {
+  test("Réponse 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("La note est modifiée", function () {
+    expect(res.getBody().rating).to.equal(9.5);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

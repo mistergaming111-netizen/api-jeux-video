@@ -1,0 +1,39 @@
+meta {
+  name: ajouter un jeu
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/games
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Celeste",
+    "editor": "Maddy Makes Games",
+    "releaseYear": 2018,
+    "genre": "Plateforme",
+    "rating": 9.0
+  }
+}
+
+tests {
+  test("Réponse 201", function () {
+    expect(res.getStatus()).to.equal(201);
+  });
+  
+  test("Le jeu a un id", function () {
+    expect(res.getBody().id).to.be.a("number");
+  });
+  
+  bru.setVar("gameId", res.getBody().id);
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

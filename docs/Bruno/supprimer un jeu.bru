@@ -1,0 +1,23 @@
+meta {
+  name: supprimer un jeu
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/games/{{gameId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Réponse 204", function () {
+    expect(res.getStatus()).to.equal(204);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

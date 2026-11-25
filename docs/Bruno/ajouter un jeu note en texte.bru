@@ -1,0 +1,33 @@
+meta {
+  name: ajouter un jeu note en texte
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/api/games
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Test",
+    "editor": "Test",
+    "releaseYear": "deux mille",
+    "genre": "Test",
+    "rating": 5
+  }
+}
+
+tests {
+  test("Réponse 400", function () {
+    expect(res.getStatus()).to.equal(400);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

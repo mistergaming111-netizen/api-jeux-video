@@ -1,0 +1,27 @@
+meta {
+  name: Récuperer un jeu
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/games/{{gameId}}/
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Réponse 200", function () {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("C'est le bon jeu", function () {
+    expect(res.getBody().title).to.equal("Celeste");
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

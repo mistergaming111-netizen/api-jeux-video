@@ -1,0 +1,23 @@
+meta {
+  name: consulter un jeu inexistant
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{baseUrl}}/api/games/999999
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Réponse 404", function () {
+    expect(res.getStatus()).to.equal(404);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

@@ -1,0 +1,31 @@
+meta {
+  name: envoyer un json mal formé
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{baseUrl}}/api/games?Content-Type=application/json
+  body: text
+  auth: inherit
+}
+
+params:query {
+  Content-Type: application/json
+}
+
+body:text {
+  {"title": "Test",
+}
+
+tests {
+  test("Réponse 400", function () {
+    expect(res.getStatus()).to.equal(400);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

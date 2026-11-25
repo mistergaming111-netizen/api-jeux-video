@@ -1,0 +1,33 @@
+meta {
+  name: modifier un jeu qui n existe pas
+  type: http
+  seq: 13
+}
+
+put {
+  url: {{baseUrl}}/api/games/999999
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "Celeste",
+    "editor": "Maddy Makes Games",
+    "releaseYear": 2018,
+    "genre": "Plateforme",
+    "rating": 9.5
+  }
+}
+
+tests {
+  test("Réponse 404", function () {
+    expect(res.getStatus()).to.equal(404);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}

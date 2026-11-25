@@ -1,0 +1,23 @@
+meta {
+  name: supprimer une deuxieme fois
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/api/games/{{gameId}}
+  body: none
+  auth: inherit
+}
+
+tests {
+  test("Réponse 404", function () {
+    expect(res.getStatus()).to.equal(404);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+  forwardAuthorizationHeader: false
+}
