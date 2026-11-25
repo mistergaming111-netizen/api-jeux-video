@@ -1,0 +1,122 @@
+openapi: 3.0.3
+
+info:
+  title: API Jeux Vidéo
+  version: 1.0.0
+  description: API de gestion d'une collection de jeux vidéo.
+
+servers:
+  - url: http://localhost:3000
+
+paths:
+  /api/games:
+    get:
+      summary: Récupérer tous les jeux
+      responses:
+        '200':
+          description: Liste des jeux récupérée avec succès.
+          # TODO : décrire le tableau JSON d'objets Game.
+        # TODO : ajouter les réponses d'erreur pertinentes.
+    post:
+      summary: Ajouter un jeu
+      # TODO : ajouter le corps JSON à partir de CreateGameInput.
+      responses:
+        '201':
+          description: Jeu créé.
+          # TODO : décrire le jeu renvoyé.
+        # TODO : ajouter les réponses d'erreur pertinentes.
+
+  /api/games/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Récupérer un jeu
+      responses:
+        '200':
+          description: Jeu trouvé.
+          # TODO : décrire le jeu renvoyé.
+        # TODO : ajouter les réponses d'erreur pertinentes.
+    put:
+      summary: Modifier un jeu
+      # TODO : ajouter le corps JSON à partir de CreateGameInput.
+      responses:
+        '200':
+          description: Jeu modifié.
+          # TODO : décrire le jeu renvoyé.
+        # TODO : ajouter les réponses d'erreur pertinentes.
+    delete:
+      summary: Supprimer un jeu
+      responses:
+        '204':
+          description: Jeu supprimé.
+        # TODO : ajouter les réponses d'erreur pertinentes.
+
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: Persona 5 Royal
+        editor:
+          type: string
+          example: Atlus
+        releaseYear:
+          type: integer
+          minimum: 1950
+          maximum: 2100
+          example: 2016
+        genre:
+          type: string
+          example: JRPG
+        rating:
+          type: number
+          minimum: 0
+          maximum: 10
+          example: 9.5
+    CreateGameInput:
+      type: object
+      required:
+        - title
+        - editor
+        - releaseYear
+        - genre
+        - rating
+      properties:
+        title:
+          type: string
+          example: Elden Ring
+        editor:
+          type: string
+          example: Bandai Namco
+        releaseYear:
+          type: integer
+          minimum: 1950
+          maximum: 2100
+          example: 2022
+        genre:
+          type: string
+          example: Action-RPG
+        rating:
+          type: number
+          minimum: 0
+          maximum: 10
+          example: 9.5
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Données invalides
+        details:
+          type: array
+          items:
+            type: string
